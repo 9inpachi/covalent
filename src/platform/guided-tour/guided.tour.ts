@@ -284,9 +284,14 @@ export class CovalentGuidedTour extends TourButtonsActions {
         advanceOn instanceof Array
       ) {
         step.advanceOn = undefined;
-        step.buttons =
-          step.advanceOnOptions && step.advanceOnOptions.allowGoBack ? [backButton, voidButton] : [voidButton];
+        step.buttons = [backButton, voidButton];
       }
+
+      // remove the back button if there is a back button and allowGoBack is set to false
+      if (step.buttons?.length > 1 && step.advanceOnOptions?.allowGoBack === false) {
+        step.buttons = step.buttons.slice(1);
+      }
+
       // adds a default beforeShowPromise function
       step.beforeShowPromise = () => {
         return new Promise((resolve: () => void) => {
