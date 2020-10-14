@@ -14,7 +14,7 @@ export class TdDynamicMenuItemComponent {
 
   @ViewChild('childMenu', { static: true }) public childMenu: MatMenu;
 
-  emitClicked(event: ITdDynamicMenuLinkClickEvent): void {
-    this.itemClicked.emit(event);
+  emitClicked(item: IMenuItem): void {
+    this.itemClicked.emit({ text: item.text, action: item.action });
   }
 }
